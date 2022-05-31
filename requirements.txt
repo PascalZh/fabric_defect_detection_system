@@ -1,0 +1,6 @@
+PyQt5
+opencv-python
+efficientnet_pytorch
+albumentations
+torch
+torchvision
