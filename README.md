@@ -2,7 +2,7 @@
 ## Firmware
 该项目的硬件平台为树莓派4b 4G版本。
 
-在树莓派上安装了64位最新版基于bulleyes版Debian的树莓派系统，系统用户信息如下：
+在树莓派上安装了64位最新版基于bullseye版Debian的树莓派系统，系统用户信息如下：
 
 - Hostname: raspberrypi
 - Username: pi
@@ -24,4 +24,6 @@
 
 
 # Reference
+[Getting Image and Video from Raspberry Pi Camera - TechWorked](https://www.techworked.com/getting-image-and-video-from-raspberry-pi-camera/)
+
 [开源工业缺陷数据集汇总，持续更新中（已更新28个） - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/195699093)
