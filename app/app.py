@@ -116,8 +116,8 @@ class RealtimeMainWindow(QMainWindow, Ui_RealtimeMainWindow):
         self.label_Status.setText('Detection result: ' + res)
 
         # save image to database if the result is defection
-        image.save('./tmp/tmp.jpg')
-        insert_image('./tmp/tmp.jpg')
+        if res == 'defection':
+            insert_image(self.image_path)
 
     def open_histories_dialog(self):
         self.histories_dialog.lookup_histories()
