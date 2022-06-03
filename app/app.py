@@ -1,6 +1,8 @@
 import sys
 import os
 import time
+from io import BytesIO
+from picamera import PiCamera
 import cv2
 from PyQt5.QtGui import QImage, QPixmap, QStandardItem
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QDialog, QTableWidget, QTableWidgetItem
@@ -64,38 +66,38 @@ class RealtimeMainWindow(QMainWindow, Ui_RealtimeMainWindow):
 
         self.image_path = './tmp/captured.jpg'
 
-        self.cap = cv2.VideoCapture(0)
+        # self.cap = cv2.VideoCapture(0)
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.show_video)
 
     def open_camera(self):
-        self.cap.open(0)
+        # self.cap.open(0)
+
+        self.camera = PiCamera()
+        self.camera.start_preview()
+        time.sleep(2)
         self.timer.start(1000//30)
 
     def close_camera(self):
-        self.cap.release()
+        # self.cap.release()
         self.timer.stop()
 
     def show_video(self):
-        flag, image = self.cap.read()
-        self.image = image
-        if flag:
-            image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-            image = QImage(
-                image.data, image.shape[1], image.shape[0], QImage.Format_RGB888)
-            self.label_Video.setPixmap(QPixmap.fromImage(image))
-            self.label_Video.adjustSize()
-        else:
-            print('Video is over.')
-            self.close_camera()
+        self.stream = BytesIO()
+        self.camera.capture(self.stream, format='jpeg')
+
+        image = QImage()
+        image.loadFromData(self.stream.getbuffer(), format='jpeg')
+        self.label_Video.setPixmap(QPixmap.fromImage(image))
+        self.label_Video.adjustSize()
 
     def capture(self):
         # capture image and run neural network model to predict
         # show image
-        cv2.imwrite(self.image_path, self.image)
-        image = cv2.cvtColor(self.image, cv2.COLOR_BGR2RGB)
-        image = QImage(
-            image.data, image.shape[1], image.shape[0], QImage.Format_RGB888)
+        with open(self.image_path, 'wb') as f:
+            f.write(self.stream.getbuffer())
+        image = QImage()
+        image.loadFromData(self.stream.getbuffer(), format='jpeg')
         if image.isNull():
             QMessageBox.information(
                 self, 'Capture Error', 'Cannot open file %s.' % os.path.abspath(self.image_path))
