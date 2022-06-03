@@ -81,13 +81,15 @@ class RealtimeMainWindow(QMainWindow, Ui_RealtimeMainWindow):
     def close_camera(self):
         # self.cap.release()
         self.timer.stop()
+        self.camera.close()
+        self.label_Video.clear()
 
     def show_video(self):
         self.stream = BytesIO()
         self.camera.capture(self.stream, format='jpeg')
 
         image = QImage()
-        image.loadFromData(self.stream.getbuffer(), format='jpeg')
+        image.loadFromData(self.stream.getvalue(), format='jpeg')
         self.label_Video.setPixmap(QPixmap.fromImage(image))
         self.label_Video.adjustSize()
 
@@ -95,9 +97,9 @@ class RealtimeMainWindow(QMainWindow, Ui_RealtimeMainWindow):
         # capture image and run neural network model to predict
         # show image
         with open(self.image_path, 'wb') as f:
-            f.write(self.stream.getbuffer())
+            f.write(self.stream.getvalue())
         image = QImage()
-        image.loadFromData(self.stream.getbuffer(), format='jpeg')
+        image.loadFromData(self.stream.getvalue(), format='jpeg')
         if image.isNull():
             QMessageBox.information(
                 self, 'Capture Error', 'Cannot open file %s.' % os.path.abspath(self.image_path))
