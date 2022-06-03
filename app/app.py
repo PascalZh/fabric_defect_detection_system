@@ -97,7 +97,7 @@ class RealtimeMainWindow(QMainWindow, Ui_RealtimeMainWindow):
         # capture image and run neural network model to predict
         # show image
         with open(self.image_path, 'wb') as f:
-            f.write(self.stream.getvalue())
+            f.write(self.stream.getbuffer())
         image = QImage()
         image.loadFromData(self.stream.getvalue(), format='jpeg')
         if image.isNull():
