@@ -64,28 +64,38 @@ class RealtimeMainWindow(QMainWindow, Ui_RealtimeMainWindow):
 
         self.image_path = './tmp/captured.jpg'
 
+        self.cap = cv2.VideoCapture(0)
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.show_video)
 
     def open_camera(self):
-        self.timer.start(30)
+        self.cap.open(0)
+        self.timer.start(1000//30)
 
     def close_camera(self):
+        self.cap.release()
         self.timer.stop()
 
     def show_video(self):
-        os.system('libcamera-jpeg --width 600 --height 600 --nopreview -o '+self.image_path)
-        image = cv2.imread(self.image_path)
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        image = QImage(
-            image.data, image.shape[1], image.shape[0], QImage.Format_RGB888)
-        self.label_Video.setPixmap(QPixmap.fromImage(image))
-        self.label_Video.adjustSize()
+        flag, image = self.cap.read()
+        self.image = image
+        if flag:
+            image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+            image = QImage(
+                image.data, image.shape[1], image.shape[0], QImage.Format_RGB888)
+            self.label_Video.setPixmap(QPixmap.fromImage(image))
+            self.label_Video.adjustSize()
+        else:
+            print('Video is over.')
+            self.close_camera()
 
     def capture(self):
         # capture image and run neural network model to predict
         # show image
-        image = QImage(self.image_path)
+        cv2.imwrite(self.image_path, self.image)
+        image = cv2.cvtColor(self.image, cv2.COLOR_BGR2RGB)
+        image = QImage(
+            image.data, image.shape[1], image.shape[0], QImage.Format_RGB888)
         if image.isNull():
             QMessageBox.information(
                 self, 'Capture Error', 'Cannot open file %s.' % os.path.abspath(self.image_path))
