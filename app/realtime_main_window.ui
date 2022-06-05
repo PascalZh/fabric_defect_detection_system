@@ -116,7 +116,7 @@
     <item row="1" column="0">
      <widget class="QLabel" name="label_Status">
       <property name="text">
-       <string>Detection waiting...</string>
+       <string>Detection result: waiting...</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>

@@ -123,7 +123,7 @@ class RealtimeMainWindow(QMainWindow, Ui_RealtimeMainWindow):
             if res == 'defection':
                 insert_image(self.image_path)
 
-        QTimer.singleShot(0, func)
+        QTimer.singleShot(1, func)
 
     def open_histories_dialog(self):
         self.histories_dialog.lookup_histories()

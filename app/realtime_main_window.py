@@ -111,6 +111,6 @@ class Ui_RealtimeMainWindow(object):
         self.pushButton_CloseCamera.setText(_translate("RealtimeMainWindow", "Close Camera"))
         self.pushButton_Capture.setText(_translate("RealtimeMainWindow", "Capture"))
         self.pushButton_LookUpHistories.setText(_translate("RealtimeMainWindow", "Lookup Histories"))
-        self.label_Status.setText(_translate("RealtimeMainWindow", "Detection waiting..."))
+        self.label_Status.setText(_translate("RealtimeMainWindow", "Detection result: waiting..."))
         self.groupBox_Camera.setTitle(_translate("RealtimeMainWindow", "Camera"))
         self.groupBox_Detection.setTitle(_translate("RealtimeMainWindow", "Detection"))
