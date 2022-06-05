@@ -74,6 +74,8 @@ class RealtimeMainWindow(QMainWindow, Ui_RealtimeMainWindow):
         # self.cap.open(0)
 
         self.camera = PiCamera()
+        self.camera.resolution = (600, 600)
+        self.camera.framerate = 32
         self.camera.start_preview()
         time.sleep(2)
         self.timer.start(1000//30)
