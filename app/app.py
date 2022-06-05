@@ -112,14 +112,18 @@ class RealtimeMainWindow(QMainWindow, Ui_RealtimeMainWindow):
 
         # eval model
         self.label_Status.setText('Evaluating...')
-        res, _ = predict(self.image_path)
 
-        # show prediction results in the gui
-        self.label_Status.setText('Detection result: ' + res)
+        def func():
+            res, _ = predict(self.image_path)
 
-        # save image to database if the result is defection
-        if res == 'defection':
-            insert_image(self.image_path)
+            # show prediction results in the gui
+            self.label_Status.setText('Detection result: ' + res)
+
+            # save image to database if the result is defection
+            if res == 'defection':
+                insert_image(self.image_path)
+
+        QTimer.singleShot(0, func)
 
     def open_histories_dialog(self):
         self.histories_dialog.lookup_histories()
