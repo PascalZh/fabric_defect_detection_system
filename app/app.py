@@ -17,7 +17,6 @@ class Dialog_Histories(QDialog, Ui_Dialog_Histories):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi(self)
-        self.setFixedSize(self.size())
         self.lookup_histories()
         self.tableWidget.itemSelectionChanged.connect(self.show_image)
         self.rows = []
@@ -58,7 +57,6 @@ class RealtimeMainWindow(QMainWindow, Ui_RealtimeMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi(self)
-        self.setFixedSize(self.size())
         self.pushButton_OpenCamera.clicked.connect(self.open_camera)
         self.pushButton_CloseCamera.clicked.connect(self.close_camera)
         self.pushButton_Capture.clicked.connect(self.capture)

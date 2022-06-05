@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>1300</width>
-    <height>900</height>
+    <height>842</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>1300</width>
-    <height>900</height>
+    <height>842</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -37,13 +37,13 @@
         <property name="minimumSize">
          <size>
           <width>600</width>
-          <height>600</height>
+          <height>620</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>600</width>
-          <height>600</height>
+          <height>620</height>
          </size>
         </property>
         <property name="title">
@@ -69,13 +69,13 @@
         <property name="minimumSize">
          <size>
           <width>600</width>
-          <height>600</height>
+          <height>620</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>600</width>
-          <height>600</height>
+          <height>620</height>
          </size>
         </property>
         <property name="title">
@@ -160,12 +160,6 @@
          <size>
           <width>120</width>
           <height>25</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>16777215</height>
          </size>
         </property>
         <property name="layoutDirection">
