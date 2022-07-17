@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+import sys
+if __name__ == "__main__" and len(sys.argv) != 2:
+    print("Usage: python3 efficient_net_predict.py <image_path>")
+    exit(1)
+
 from PIL import Image
 
 # import matplotlib.pyplot as plt
@@ -11,7 +16,6 @@ from torchvision import transforms
 from efficientnet_pytorch import EfficientNet
 import albumentations as A
 
-from os import system
 
 # torch.set_num_threads(4)
 
@@ -178,5 +182,5 @@ def predict(img_path):
 
 
 if __name__ == "__main__":
-    predict('./tmp/captured.jpg')
+    predict(sys.argv[1])
 # plt.show()
